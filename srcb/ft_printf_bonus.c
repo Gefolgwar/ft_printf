@@ -1,0 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/17 09:24:33 by aperez-b          #+#    #+#             */
+/*   Updated: 2021/09/27 19:31:55 by aperez-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../inc/ft_printf_bonus.h"
+
+int	ft_printf(const char *str, ...)
+{
+	int			count;
+	va_list		ap;
+	char		*first;
+
+	count = 0;
+	va_start(ap, str);
+	while (*str)
+	{
+		if (*str == '%')
+		{
+			first = (char *)str;
+			if (*(++str))
+				count += ft_parse((char *)str, ap);
+			while (*str && !ft_strchr(SPECIFIERS, *str))
+				str++;
+			if (!(*str))
+				str = first;
+		}
+		else
+			count += ft_putchar_fd(*str, 1);
+		if (*str)
+			str++;
+	}
+	va_end(ap);
+	return (count);
+}
+
+int	ft_print_format(t_format f, va_list ap)
+{
+	int	count;
+
+	count = 0;
+	if (f.specifier == 'c' || f.specifier == '%')
+		count = ft_print_c_pct(f, ap);
+	else if (f.specifier == 's')
+		count = ft_print_s(f, ap);
+	else if (f.specifier == 'd' || f.specifier == 'i' || f.specifier == 'u')
+		count = ft_print_d_i_u(f, ap);
+	else if (f.specifier == 'x' || f.specifier == 'X')
+		count = ft_print_x(f, ap);
+    // !!! ДОДАЄМО ВИКЛИК НОВОЇ ФУНКЦІЇ ДЛЯ 'o' !!!
+	else if (f.specifier == 'o')
+		count = ft_print_o(f, ap);
+    // ---------------------------------------------
+	else if (f.specifier == 'p')
+		count = ft_print_p(f, ap);
+	return (count);
+}

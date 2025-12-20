@@ -1,0 +1,8 @@
+printfTester/
+pft/
+test_main/
+.vscode/
+*.out
+*.o
+*.swp
+libft.a
