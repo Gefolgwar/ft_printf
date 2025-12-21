@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/17 09:24:33 by aperez-b          #+#    #+#             */
-/*   Updated: 2021/09/27 19:31:55 by aperez-b         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../inc/ft_printf_bonus.h"
 
 int	ft_printf(const char *str, ...)
@@ -54,10 +42,8 @@ int	ft_print_format(t_format f, va_list ap)
 		count = ft_print_d_i_u(f, ap);
 	else if (f.specifier == 'x' || f.specifier == 'X')
 		count = ft_print_x(f, ap);
-    // !!! ДОДАЄМО ВИКЛИК НОВОЇ ФУНКЦІЇ ДЛЯ 'o' !!!
 	else if (f.specifier == 'o')
 		count = ft_print_o(f, ap);
-    // ---------------------------------------------
 	else if (f.specifier == 'p')
 		count = ft_print_p(f, ap);
 	return (count);

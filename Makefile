@@ -9,8 +9,24 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -I./inc -g
 RM = rm -rf
 NAME = libftprintf.a
-SRCS = src/ft_printf.c src/prt_str.c src/prt_ptr.c src/prt_int.c src/prt_unsigned.c src/prt_hexa.c
-SRCSB = srcb/ft_printf_bonus.c srcb/ft_print_nbrs_bonus.c srcb/ft_print_hex_bonus.c srcb/ft_print_chars_bonus.c srcb/ft_parse_bonus.c srcb/ft_format_bonus.c
+SRCS = src/ft_printf.c \
+	src/prt_str.c \
+	src/prt_ptr.c \
+	src/prt_int.c \
+	src/prt_unsigned.c \
+	src/prt_hexa.c
+SRCSB = srcb/ft_convert_nbrs_utils.c \
+	srcb/ft_handle_nbrs_d_i_u_data.c \
+	srcb/ft_print_nbrs_d_i_u_bonus.c \
+	srcb/ft_print_hex_utils.c \
+	srcb/ft_print_hex_p_bonus.c \
+	srcb/ft_print_hex_o_bonus.c \
+	srcb/ft_print_hex_x_bonus.c \
+	srcb/ft_print_chars_bonus.c \
+	srcb/ft_parse_bonus.c \
+	srcb/ft_format_bonus.c \
+	srcb/ft_parse_utils.c \
+	srcb/ft_printf_bonus.c
 OBJS = $(SRCS:.c=.o)
 OBJSB = $(SRCSB:.c=.o)
 

@@ -30,13 +30,16 @@ PART2 = ft_itoa.c ft_strjoin.c ft_split.c ft_striteri.c ft_strmapi.c \
 		ft_putnbr_fd.c
 
 BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
-		ft_lstiter.c ft_lstmap.c ft_lstsize.c ft_lstlast.c ft_putnchar_fd.c ft_putnchar_fd.c	\
-		ft_nbrlen.c ft_putstrn_fd.c ft_uitoa.c
+		ft_lstiter.c ft_lstmap.c ft_lstsize.c ft_lstlast.c \
+		
+SRCA = ft_putnchar_fd.c ft_nbrlen.c ft_putstrn_fd.c ft_uitoa.c
 
 SRC = ${PART1} ${PART2}
 
 OBJS = ${SRC:.c=.o}
 BONUS_OBJS = ${BONUS:.c=.o}
+OBJS_SRCA = ${SRCA:.c=.o}
+
 
 CC = gcc
 RM = rm -f
@@ -51,12 +54,12 @@ $(NAME): ${OBJS}
 
 all:	${NAME}
 
-bonus:	${OBJS} ${BONUS_OBJS}
-		ar rc ${NAME} ${OBJS} ${BONUS_OBJS}
+bonus:	${OBJS} ${BONUS_OBJS} ${OBJS_SRCA}
+		ar rc ${NAME} ${OBJS} ${BONUS_OBJS} ${OBJS_SRCA}
 		@echo "$(YEL)Libft: $(GRN)Mandatory$(YEL) and $(MAG)Bonus$(YEL) part compiled and archived.$(STD)"
 
 clean:
-		${RM} ${OBJS} ${BONUS_OBJS}
+		${RM} ${OBJS} ${BONUS_OBJS} ${OBJS_SRCA}
 		@echo "$(YEL)Libft: Object files cleaned.$(STD)"
 
 fclean: clean
