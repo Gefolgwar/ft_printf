@@ -197,7 +197,7 @@ classDiagram
     }
 
     %% Notes (Using simpler 'note for' syntax for maximum compatibility)
-    note for ft_parse "Central parsing function. Calls ft_parse_width/precision. Finalizes flags (e.g., width<0 -> minus=1)."
+    note for ft_parse "Central parsing function. Calls ft_parse_width/precision.\n Finalizes flags (e.g., width<0 -> minus=1)."
     note for ft_parse_utils "Parses and sets all flags (+, ' ', #, -, 0) and width/precision values, including the '*' character."
     note for ft_handle_nbrs "Responsible for extracting and converting numerical arguments (d, i, u, o) to a string. Sets the NEG sign."
     note for ft_print_d_i_u "Formatting and printing logic for integers (d, i, u), respecting flags +, ' ', -, 0, and precision."
