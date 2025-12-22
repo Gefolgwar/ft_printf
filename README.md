@@ -116,96 +116,81 @@ December 20th, 2025
 ---
 title ft_printf w/ Bonus Structure
 ---
-classDiagram
-    class libft_h["libft.h"]
-    
-    class ft_printf_h["ft_printf_bonus.h"]
-    class ft_parse_utils["ft_parse_utils.c"]
-    class ft_parse["ft_parse_bonus.c"]
-    class ft_print_c_pct["ft_print_chars_bonus.c"]
-    class ft_print_s["ft_print_chars_bonus.c"]
-    class ft_handle_nbrs["ft_handle_nbrs_d_i_u_data.c"]
-    class ft_print_d_i_u["ft_print_nbrs_d_i_u_bonus.c"]
-    class ft_print_o["ft_print_hex_o_bonus.c"]
-    class ft_print_x["ft_print_hex_x_bonus.c"]
-    class ft_print_p["ft_print_hex_p_bonus.c"]
-    class ft_recursive_hex["ft_print_hex_utils.c"]
-    class ft_convert_nbrs["ft_convert_nbrs_utils.c"]
+flowchart LR
+  classDef sub opacity:0
+  classDef note fill:#ffd,stroke:#ccb
+  
+  subgraph subH[" "]
+    H["ft_printf_h"]
+  end
+  subgraph subLH[" "]
+    LH["libft_h"]
+  end
+  subgraph subP[" "]
+    P["ft_parse"]
+  end
+  subgraph subPU[" "]
+    PU["ft_parse_utils"]
+  end
+  subgraph subHN[" "]
+    HN["ft_handle_nbrs"]
+  end
+  subgraph subDIU[" "]
+    DIU["ft_print_d_i_u"]
+  end
+  subgraph subX[" "]
+    X["ft_print_x"]
+  end
+  subgraph subO[" "]
+    O["ft_print_o"]
+  end
+  subgraph subPP[" "]
+    PP["ft_print_p"]
+  end
+  subgraph subRH[" "]
+    RH["ft_recursive_hex"]
+  end
+  subgraph subCP[" "]
+    CP["ft_print_c_pct"]
+  end
+  subgraph subS[" "]
+    S["ft_print_s"]
+  end
+  subgraph subCN[" "]
+    CN["ft_convert_nbrs"]
+  end
 
-    %% Relationships - Defined as a chain to force vertical layout
-    libft_h --> ft_printf_h
-    ft_printf_h --> ft_parse_utils
-    ft_printf_h --> ft_parse
-    ft_printf_h --> ft_print_c_pct
-    ft_printf_h --> ft_print_s
-    ft_printf_h --> ft_handle_nbrs
-    ft_printf_h --> ft_print_d_i_u
-    ft_printf_h --> ft_print_o
-    ft_printf_h --> ft_print_x
-    ft_printf_h --> ft_print_p
-    ft_printf_h --> ft_recursive_hex
-    ft_printf_h --> ft_convert_nbrs
-    
-    %% Methods
-    class ft_parse["ft_parse_bonus.c"] {
-        ft_parse(str, ap)
-        ft_handle_flags(f)
-    }
-    class ft_parse_utils["ft_parse_utils.c"] {
-        ft_parse_bonus(str, f)
-        ft_parse_width(str, ap, f)
-        ft_parse_precision(str, ap, f)
-    }
-    class ft_handle_nbrs["ft_handle_nbrs_d_i_u_data.c"] {
-        ft_handle_d_i_u_data(f, ap, info)
-        ft_get_num_arg(f, ap, neg)
-        ft_read_and_convert_num(f, ap, neg)
-    }
-    class ft_print_d_i_u["ft_print_nbrs_d_i_u_bonus.c"] {
-        ft_print_d_i_u(f, ap)
-        ft_print_nbr(f, nbr, len, neg)
-        ft_print_nbr_parts(f, nbr, data)
-    }
-    class ft_print_x["ft_print_hex_x_bonus.c"] {
-        ft_print_x(f, ap)
-        ft_print_x_output(f, n, len)
-        ft_sharp(f)
-    }
-    class ft_print_o["ft_print_hex_o_bonus.c"] {
-        ft_print_o(f, ap)
-        ft_recursive_octal(f, n)
-        ft_print_o_output(f, n, len, total_len)
-    }
-    class ft_print_p["ft_print_hex_p_bonus.c"] {
-        ft_print_p(f, ap)
-        ft_print_p_non_null(f, n, len)
-        ft_print_p_null(f)
-    }
-    class ft_recursive_hex["ft_print_hex_utils.c"] {
-        ft_recursive_hex_print(f, n, iteration)
-    }
-    class ft_print_c_pct["ft_print_chars_bonus.c"] {
-        ft_print_c_pct(f, ap)
-        ft_print_pct()
-    }
-    class ft_print_s["ft_print_chars_bonus.c"] {
-        ft_print_s(f, ap)
-        ft_get_str_len(f, string)
-    }
-    class ft_convert_nbrs["ft_convert_nbrs_utils.c"] {
-        ft_uitoa_base(n, base)
-    }
+  %% Зв'язки
+  LH --> H
+  H --> PU & P & CP & S & HN & DIU & O & X & PP & RH & CN
 
-    %% Notes (Using simpler 'note for' syntax for maximum compatibility)
-    note for ft_parse "Central parsing function. Calls ft_parse_width/precision. Finalizes flags (e.g., width<0 -> minus=1)."
-    note for ft_parse_utils "Parses and sets all flags (+, ' ', #, -, 0) and width/precision values, including the '*' character."
-    note for ft_handle_nbrs "Responsible for extracting and converting numerical arguments (d, i, u, o) to a string. Sets the NEG sign."
-    note for ft_print_d_i_u "Formatting and printing logic for integers (d, i, u), respecting flags +, ' ', -, 0, and precision."
-    note for ft_print_x "Hexadecimal number handling (x, X). Implements the # flag (0x/0X prefix)."
-    note for ft_print_o "Octal number handling (o). Implements the # flag (0 prefix)."
-    note for ft_print_p "Pointer handling (p). Includes special logic for NULL pointers (outputs '(nil)')."
-    note for ft_recursive_hex "Recursive printing of hexadecimal numbers. Used for x, X, and p."
-    note for ft_print_c_pct "Prints characters (c) and the percent sign (%). Handles width flag."
-    note for ft_print_s "Prints strings (s). Handles precision (truncation) and width. Includes '(null)' logic."
-    note for ft_convert_nbrs "Conversion utilities: converts unsigned int to a string in the given number base. Used for 'o'."
+  %% Асоціативні зв'язки для нотаток
+  H ~~~ noteH
+  LH ~~~ noteLH
+  P ~~~ noteP
+  PU ~~~ notePU
+  HN ~~~ noteHN
+  DIU ~~~ noteDIU
+  X ~~~ noteX
+  O ~~~ noteO
+  PP ~~~ notePP
+  RH ~~~ noteRH
+  CP ~~~ noteCP
+  S ~~~ noteS
+  CN ~~~ noteCN
+
+  %% Нотатки з англійським текстом
+  noteH["ft_printf_bonus.h: Main header and interface."]:::note
+  noteLH["libft.h: Contains core helper functions."]:::note
+  noteP["Central parsing function. Finalizes flags (width<0 -> minus=1)."]:::note
+  notePU["Parses flags (+, ' ', #, -, 0), width, and precision (including '*')."]:::note
+  noteHN["Responsible for extracting and converting numerical arguments (d, i, u, o). Sets the NEG sign."]:::note
+  noteDIU["Formatting and printing logic for integers (d, i, u), respecting all flags and precision."]:::note
+  noteX["Hexadecimal handling (x, X). Implements the # flag (0x/0X prefix)."]:::note
+  noteO["Octal handling (o). Implements the # flag (0 prefix)."]:::note
+  notePP["Pointer handling (p). Includes special logic for NULL pointers (outputs '(nil)')."]:::note
+  noteRH["Recursive printing of hexadecimal numbers. Used for x, X, and p."]:::note
+  noteCP["Prints characters (c) and the percent sign (%). Handles width flag."]:::note
+  noteS["Prints strings (s). Handles precision (truncation), width, and '(null)' logic."]:::note
+  noteCN["Conversion utilities: converts unsigned int to a string in the given number base. Used for 'o'."]:::note
 ```
