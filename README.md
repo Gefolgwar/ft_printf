@@ -145,7 +145,7 @@ classDiagram
     ft_printf_h --> ft_print_s
     ft_printf_h --> ft_print_u
     
-    ft_printf : ft_printf(Main function. Manages VA_LIST and loops through the format string.)
+    ft_printf : int	ft_printf(const char *str, ...)
     note for ft_printf "Main file. Manages VA_LIST and loops through the format string."
     ft_flag_utils : ft_isflag()
     ft_flag_utils : ft_isspecif()
