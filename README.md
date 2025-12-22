@@ -116,10 +116,6 @@ December 20th, 2025
 ---
 title ft_printf w/ Bonus Structure
 ---
----
-config:
-  layout: dagre
----
 classDiagram
 direction LR
     class libft_h["libft.h"] {
