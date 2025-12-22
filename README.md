@@ -152,21 +152,21 @@ classDiagram
         ft_parse(str, ap)
         ft_handle_flags(f)
     }
-    note bottom of ft_parse "Central parsing function. Calls ft_parse_width/precision. Finalizes flags (e.g., width<0 -> minus=1)."
+    note for ft_parse "Central parsing function. Calls ft_parse_width/precision. Finalizes flags (e.g., width<0 -> minus=1)."
 
     class ft_parse_utils["ft_parse_utils.c"] {
         ft_parse_bonus(str, f)
         ft_parse_width(str, ap, f)
         ft_parse_precision(str, ap, f)
     }
-    note bottom of ft_parse_utils "Parses and sets all flags (+, ' ', #, -, 0) and width/precision values, including the '*' character."
+    note for ft_parse_utils "Parses and sets all flags (+, ' ', #, -, 0) and width/precision values, including the '*' character."
 
     class ft_handle_nbrs["ft_handle_nbrs_d_i_u_data.c"] {
         ft_handle_d_i_u_data(f, ap, info)
         ft_get_num_arg(f, ap, neg)
         ft_read_and_convert_num(f, ap, neg)
     }
-    note bottom of ft_handle_nbrs "Responsible for extracting and converting numerical arguments (d, i, u, o) to a string. Sets the NEG sign."
+    note for ft_handle_nbrs "Responsible for extracting and converting numerical arguments (d, i, u, o) to a string. Sets the NEG sign."
 
     class ft_print_d_i_u["ft_print_nbrs_d_i_u_bonus.c"] {
         ft_print_d_i_u(f, ap)
@@ -194,12 +194,12 @@ classDiagram
         ft_print_p_non_null(f, n, len)
         ft_print_p_null(f)
     }
-    note bottom of ft_print_p "Pointer handling (p). Includes special logic for NULL pointers (outputs '(nil)')."
+    note for ft_print_p "Pointer handling (p). Includes special logic for NULL pointers (outputs '(nil)')."
 
     class ft_recursive_hex["ft_print_hex_utils.c"] {
         ft_recursive_hex_print(f, n, iteration)
     }
-    note bottom of ft_recursive_hex "Recursive printing of hexadecimal numbers. Used for x, X, and p."
+    note for ft_recursive_hex "Recursive printing of hexadecimal numbers. Used for x, X, and p."
 
     class ft_print_c_pct["ft_print_chars_bonus.c"] {
         ft_print_c_pct(f, ap)
@@ -216,5 +216,5 @@ classDiagram
     class ft_convert_nbrs["ft_convert_nbrs_utils.c"] {
         ft_uitoa_base(n, base)
     }
-    note bottom of ft_convert_nbrs "Conversion utilities: converts unsigned int to a string in the given number base. Used for 'o'."
+    note for ft_convert_nbrs "Conversion utilities: converts unsigned int to a string in the given number base. Used for 'o'."
 ```
