@@ -5,7 +5,6 @@
 # include "libft.h"
 # include <stdarg.h>
 
-/* Struct to keep track of various format parameters */
 typedef struct s_format
 {
 	int		minus;
