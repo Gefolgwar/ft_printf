@@ -146,6 +146,7 @@ classDiagram
     ft_printf_h --> ft_print_u
     
     ft_printf : ft_printf()
+    note for ft_printf "Головна функція. Керує va_list та циклом по рядку формату."
     ft_flag_utils : ft_isflag()
     ft_flag_utils : ft_isspecif()
     ft_flag_utils : ft_isflagtype()
