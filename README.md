@@ -173,21 +173,21 @@ classDiagram
         ft_print_nbr(f, nbr, len, neg)
         ft_print_nbr_parts(f, nbr, data)
     }
-    note right of ft_print_d_i_u "Formatting and printing logic for integers (d, i, u), respecting flags +, ' ', -, 0, and precision."
+    note for ft_print_d_i_u "Formatting and printing logic for integers (d, i, u), respecting flags +, ' ', -, 0, and precision."
 
     class ft_print_x["ft_print_hex_x_bonus.c"] {
         ft_print_x(f, ap)
         ft_print_x_output(f, n, len)
         ft_sharp(f)
     }
-    note top of ft_print_x "Hexadecimal number handling (x, X). Implements the # flag (0x/0X prefix)."
+    note for ft_print_x "Hexadecimal number handling (x, X). Implements the # flag (0x/0X prefix)."
 
     class ft_print_o["ft_print_hex_o_bonus.c"] {
         ft_print_o(f, ap)
         ft_recursive_octal(f, n)
         ft_print_o_output(f, n, len, total_len)
     }
-    note left of ft_print_o "Octal number handling (o). Implements the # flag (0 prefix)."
+    note for ft_print_o "Octal number handling (o). Implements the # flag (0 prefix)."
 
     class ft_print_p["ft_print_hex_p_bonus.c"] {
         ft_print_p(f, ap)
@@ -205,13 +205,13 @@ classDiagram
         ft_print_c_pct(f, ap)
         ft_print_pct()
     }
-    note left of ft_print_c_pct "Prints characters (c) and the percent sign (%). Handles width flag."
+    note for ft_print_c_pct "Prints characters (c) and the percent sign (%). Handles width flag."
 
     class ft_print_s["ft_print_chars_bonus.c"] {
         ft_print_s(f, ap)
         ft_get_str_len(f, string)
     }
-    note right of ft_print_s "Prints strings (s). Handles precision (truncation) and width. Includes '(null)' logic."
+    note for ft_print_s "Prints strings (s). Handles precision (truncation) and width. Includes '(null)' logic."
     
     class ft_convert_nbrs["ft_convert_nbrs_utils.c"] {
         ft_uitoa_base(n, base)
