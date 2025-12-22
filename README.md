@@ -76,33 +76,111 @@ As this is quite a straightforward approach at printf, there are a few limitatio
 In order for you to test this printf, it is recommended that you install the following dependencies:
 
 ```shell
-gcc clang python-norminette make
+111111111111111111gcc clang python-norminette make
 ```
-For Linux users, it is also recommended to install ``valgrind`` (Leak checker)
+111111111111111111For Linux users, it is also recommended to install ``valgrind`` (Leak checker)
 
-* Testing the ``ft_printf`` function
+111111111111111111* Testing the ``ft_printf`` function
 ```shell
-git clone 
-cd ft_printf
-make
+1111111111111111111git clone 
+1111111111111111111cd ft_printf
+1111111111111111111make
 ```
-Feel free to replace your own libft inside the ``ft_printf`` folder
+1111111111111111111111111111111Feel free to replace your own libft inside the ``ft_printf`` folder
 
 
 * Usage:
 
-The makefile compiles all files from the ``src/`` or ``srcb/`` folders and saves the object files to the ``obj/`` and ``objb/`` folders. It then generates the output file ``libftprintf.a`` inside the ``bin/`` folder. Here are some of the commands you can try:
+The makefile compiles all files from the ``src/`` or ``srcb/`` folders and saves the object files to the ``obj/`` and ``objb/`` folders. It then generates the output file ``libftprintf.a`` inside the 111111111111111111``bin/`` folder. Here are some of the commands you can try:
 
 ```
-make all		Compiles the libftprintf.a file
-make test		Compiles ft_printf and libft with a custom main. Checks for leaks in Mac and Linux
-make bonus		Compiles all bonus files instead of the mandatory ones
-make norminette		Checks Norm for both printf and libft files	
-make git		Stages every modified file to commit and pushes to upstream branch
+11111111111111111111111make all		Compiles the libftprintf.a file
+11111111111111111111111make test		Compiles ft_printf and libft with a custom main. Checks for leaks in Mac and Linux
+1111111111111111111111111111make bonus		Compiles all bonus files instead of the mandatory ones
+111111111111111111111111111111make norminette		Checks Norm for both printf and libft files	
+111111111111111111111111111111111make git		Stages every modified file to commit and pushes to upstream branch
 ```
 
 ## Summary
 
-This was my second project as a 42 student in Madrid. Looking forward to the new projects coming next!
 
 December 20th, 2025
+
+### Bonus Structure:exclamation:
+
+#### Bonus Files & Folder Structure
+
+`ft_printf()`s bonus code base has the following file structure:
+
+```mermaid
+---
+title ft_printf w/ Bonus Structure
+---
+classDiagram
+    class Makefile
+    class libft["libft.h"]
+    
+    class ft_printf_h["ft_printf_bonus.h"]
+    class ft_printf["ft_printf_bonus.c"]
+    class ft_flag_utils["ft_flag_utils_bonus.c"]
+    class ft_flags["ft_flags_bonus.c"]
+    class ft_parse["ft_parse_bonus.c"]
+    class ft_print_c["ft_print_c_bonus.c"]
+    class ft_print_di["ft_print_di_bonus.c"]
+    class ft_print_hex["ft_print_hex_bonus.c"]
+    class ft_print_p["ft_print_p_bonus.c"]
+    class ft_print_s["ft_print_s_bonus.c"]
+    class ft_print_u["ft_print_u_bonus.c"]
+   
+    Makefile <-- ft_printf_h
+    libft --> ft_printf_h
+    ft_printf_h --> ft_printf
+    ft_printf_h --> ft_flag_utils
+    ft_printf_h --> ft_flags
+    ft_printf_h --> ft_parse
+    ft_printf_h --> ft_print_c
+    ft_printf_h --> ft_print_di
+    ft_printf_h --> ft_print_hex
+    ft_printf_h --> ft_print_p
+    ft_printf_h --> ft_print_s
+    ft_printf_h --> ft_print_u
+    
+    ft_printf : ft_printf()
+    ft_flag_utils : ft_isflag()
+    ft_flag_utils : ft_isspecif()
+    ft_flag_utils : ft_isflagtype()
+    ft_flag_utils : ft_isflagtype()
+    ft_flag_utils : ft_pad_width()
+    ft_flags : ft_newformat()
+    ft_flags : ft_resetformat()
+    ft_flags : ft_flag_minus()
+    ft_flags : ft_flag_digit()
+    ft_flags : ft_flag_width()
+    ft_flags : ft_flag_prec()
+    ft_parse : ft_parse_bonus()
+    ft_parse : ft_parse_flags()
+    ft_parse : ft_parse_arg()
+    ft_parse : ft_parse_width()
+    ft_parse : ft_parse_prec()
+    ft_print_c : ft_print_c()
+    ft_print_di : ft_print_di()
+    ft_print_di : ft_print_integer()
+    ft_print_di : ft_print_precision()
+    ft_print_di : ft_print_i()
+    ft_print_hex : ft_print_x()
+    ft_print_hex : ft_print_hexa()
+    ft_print_hex : ft_print_puthex()
+    ft_print_hex : ft_print_putx_prefix()
+    ft_print_p : ft_print_p()
+    ft_print_p : ft_print_ptr()
+    ft_print_p : ft_print_address()
+    ft_print_p : ft_ptrlen()
+    ft_print_s : ft_print_s()
+    ft_print_s : ft_putstr()
+    ft_print_s : ft_print_s_precision()
+    ft_print_s : ft_print_str()
+    ft_print_u : ft_print_u()
+    ft_print_u : ft_print_uint()
+    ft_print_u : ft_print_uint()
+    ft_print_u : ft_print_unsigned()
+```
