@@ -117,6 +117,7 @@ December 20th, 2025
 title ft_printf w/ Bonus Structure
 ---
 classDiagram
+    graph LR;
     class libft_h["libft.h"]
     
     class ft_printf_h["ft_printf_bonus.h"]
@@ -197,7 +198,7 @@ classDiagram
     }
 
     %% Notes (Using simpler 'note for' syntax for maximum compatibility)
-    note for ft_parse "Central parsing function. Calls ft_parse_width/precision.\n Finalizes flags (e.g., width<0 -> minus=1)."
+    note for ft_parse "Central parsing function. Calls ft_parse_width/precision. Finalizes flags (e.g., width<0 -> minus=1)."
     note for ft_parse_utils "Parses and sets all flags (+, ' ', #, -, 0) and width/precision values, including the '*' character."
     note for ft_handle_nbrs "Responsible for extracting and converting numerical arguments (d, i, u, o) to a string. Sets the NEG sign."
     note for ft_print_d_i_u "Formatting and printing logic for integers (d, i, u), respecting flags +, ' ', -, 0, and precision."
