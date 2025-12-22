@@ -1,114 +1,133 @@
-# ft_printf | 42 Gefolgwar
+# ft_printf | psviatus@student.42berlin.de
 
-*Because ft_putstr & ft_putnbr aren't enough :stuck_out_tongue_winking_eye:*
+This project has been created as part of the 42 curriculum by psviatus
 
 ### Table of Contents
 
-* [ft_print what?](#ft_print-what)
-* [Capabilities](#capabilities)
-* [Bonus](#bonus)
-* [Limitations](#limitations)
-* [Installation](#installation)
+* [1. Description](#1-description)
+    * [1.1 Supported Format Specifiers and Flags](#11-supported-format-specifiers-and-flags)
+    * [1.2 Mandatory Part: Core `ft_printf`](#12-description---mandatory-part-core-ft_printf)
+    * [1.3 Bonus Part: Core Modifiers and Advanced Flags](#13-description---bonus-part-core-modifiers-and-advanced-flags)
+* [2. Installation](#2-installation)
+* [3. Resources](#3-resources)
+    * [3.1 Third-Party Testers](#31-hird-party-testers)
+    * [3.2 Useful Links](#32-useful-links)
+* [4. Additional section](#4-additional-section)
+    * [4.1 Functions](#41-functions)
+    * [4.2 Bonus Structure](#42-bonus-structureexclamation)
 * [Summary](#summary)
 
-## ft_print what?
-Printf is likely one of the most popular commands people see when learning a new programming language, and for a good reason. They are easy to understand and very powerful too. This is why learning to implement our own version of printf can help us better understand what happens internally when entering ``printf("Hello World")``!
+## 1. Description
 
-## Capabilities
-Our version of the printf function will be called ``ft_printf``, and will be able to work with the following inputs:
+**ft_printf** ft_printf is a custom implementation of the standard C library function `printf`. 
 
+The project's goals are: 
 
-* Specifiers
+- learn (`va_list`); 
 
-| Specifier | Description |
-| :-------: | :---------: |
-| ``%`` | Prints the percent character |
-| ``c`` | Prints a character |
-| ``s`` | Prints a string (array of characters) |
-| ``d``,``i`` | Prints an integer |
-| ``p`` | Prints pointer address (hex starting with ``0x``) |
-| ``u`` | Prints an unsigned integer |
-| ``x`` | Prints an unsigned hexadecimal integer (lowecase a-f) |
-| ``X`` | Prints an unsigned hexadecimal integer (uppercase A-F) |
+- learn the logic of format specifier parsing; 
 
-* Flags
+- learn how to build and debug large-scale projects.
 
-| Flag | Description |
-| :--: | :---------: |
-| (width) | Specifies the minimum width of the printed variable (adds spaces when necessary) |
-| (precision) | Selects the minimum number of elements of the variable that are printed (Eg. number of chars from a string) |
-| ``-`` | Pads text to the left (adds spaces to the right) |
-| ``0`` | Pads text with zeroes instead of spaces |
-| ``.`` | Separates Width and Precision |
-| ``*`` | Indicates that the Width or the Precision will be specified using an additional variable |
+### 1. Description - Supported Format Specifiers and Flags
 
-Our ft_printf function has the following prototype:
-```C
-int ft_printf(const char *str, ...);
-```
+This project is logically divided into two distinct parts: **Mandatory** and **Bonus**, which are compiled **separately!!!**
 
-The general idea of the function is to iterate over ``str`` and print normally until a ``%`` is read. From there, we parse the next elements until one of the Specifiers is found or until the end of the string ``\0`` is reached, whichever comes first. The general structure of the elements we want to parse is the following:
+### 1.2 Description - Mandatory Part: Core `ft_printf`
 
-```
-%[Flags][Width].[Precision][Specifier]
-```
+Format structure: `%[Specifier]`
 
-## Bonus
-As of July 2021, the subject for this project has changed, and the flags ``-0.`` are now part of the bonuses. Also the ``*`` flag is gone entirely, though I have decided to keep it in my version of the code, since it took a while to implement and I wish to keep it. Other flags we need to implement in this bonus part are:
+| Specifier | Type | Purpose |
+| :-------: | :--- | :---------: |
+| `c` | char | Prints a single character. |
+| `s` | string | Prints a string (handles `(null)`). |
+| `p` | pointer | Prints the memory address in lowercase hexadecimal (prefix `0x`). |
+| `d`, `i` | integer | Prints a signed decimal integer (`int`). |
+| `u` | unsigned int | Prints an unsigned decimal integer. |
+| `x` | hex (lower) | Prints an unsigned number in lowercase hexadecimal (a-f). |
+| `X` | hex (upper) | Prints an unsigned number in uppercase hexadecimal (A-F). |
+| `%%` | percent | Prints the percent character `%`. |
 
-| Bonus Flag | Description |
+### 1.3 Description - Bonus Part: Core Modifiers and Advanced Flags
+
+Format structure: `%[Flags][Width][.Precision][Specifier]`
+
+| Specifier | Type | Purpose |
+| :-------: | :--- | :---------: |
+| `c` | char | Prints a single character. |
+| `s` | string | Prints a string (handles `(null)`). |
+| `p` | pointer | Prints the memory address in lowercase hexadecimal (prefix `0x`). |
+| `d`, `i` | integer | Prints a signed decimal integer (`int`). |
+| `u` | unsigned int | Prints an unsigned decimal integer. |
+| `x` | hex (lower) | Prints an unsigned number in lowercase hexadecimal (a-f). |
+| `X` | hex (upper) | Prints an unsigned number in uppercase hexadecimal (A-F). |
+| `%%` | percent | Prints the percent character `%`. |
+
+| Modifier | Name | Purpose |
+| :------: | :---: | :--------- |
+| **(Width)** | Minimum Field Width | The minimum number of characters the output should occupy. Default padding is spaces on the left. |
+| **(Precision)** | Precision | For `s`: maximum string length. For numbers: minimum number of digits (padded with `0`s). |
+| **`*`** | Dynamic Argument | Indicates that Width or Precision will be specified using the next `va_list` argument (Bonus). |
+| **`-`** | Left Justification | Pads the text with spaces on the right (overrides `0`). |
+| **`0`** | Zero Padding | Pads the output with zeroes instead of spaces (for numeric types; ignored if Precision is set). |
+| **`.`** | Precision Separator | Used to define the Precision field. |
+
+| Bonus Flag | Purpose |
 | :--------: | :---------: |
-| ``#`` | Adds "0X" or "0x" to conversions with hexadecimal specifiers (excluding p) for values other than zero |
-| (space) |A blank space is added provided that no sign is specified |
-| ``+`` | Adds a plus sign in front of positive numbers |
+| **`#`** | Hex Prefix | Adds `0x` or `0X` prefix to non-zero hexadecimal numbers (`x`, `X`). |
+| **` `** | Space Sign | Adds a space before positive numbers (ignored if `+` is present). |
+| **`+`** | Forced Sign | Adds a plus sign (`+`) in front of positive numbers. |
 
-## Limitations
+### Limitations
 
-As this is quite a straightforward approach at printf, there are a few limitations to consider, namely:
+* **Buffer Management:** `ft_printf` does not implement internal output buffering.
+* **Full Feature Set:** Many advanced features of the real `printf` (e.g., floating-point, long long types, locales) are not included.
+* **Dependencies:** Performance is limited by the underlying custom `libft` functions used for basic I/O and string manipulation.
 
-* Our ``ft_printf`` does not have buffer management, unlike the real printf
-* This implementation of printf doesn't handle overflows and unexpected inputs the same way the real printf would
-* Our ``ft_printf`` isn't nearly as powerful as the real prinft since many features are not included
-* ``ft_printf`` relies on our personal libft library, which makes it slower in performance when compared to the original printf
-
-## Installation
-
-In order for you to test this printf, it is recommended that you install the following dependencies:
+## 2. Installation
 
 ```shell
-111111111111111111gcc clang python-norminette make
+make all #Compiles the Mandatory source files and creates the static library libftprintf.a
 ```
-111111111111111111For Linux users, it is also recommended to install ``valgrind`` (Leak checker)
-
-111111111111111111* Testing the ``ft_printf`` function
 ```shell
-1111111111111111111git clone 
-1111111111111111111cd ft_printf
-1111111111111111111make
+make bonus #Compiles the Bonus source files, including logic for all advanced flags.
 ```
-1111111111111111111111111111111Feel free to replace your own libft inside the ``ft_printf`` folder
-
-
-* Usage:
-
-The makefile compiles all files from the ``src/`` or ``srcb/`` folders and saves the object files to the ``obj/`` and ``objb/`` folders. It then generates the output file ``libftprintf.a`` inside the 111111111111111111``bin/`` folder. Here are some of the commands you can try:
-
+```shell
+make clean #Removes all object files (.o) from the project and libft.
 ```
-11111111111111111111111make all		Compiles the libftprintf.a file
-11111111111111111111111make test		Compiles ft_printf and libft with a custom main. Checks for leaks in Mac and Linux
-1111111111111111111111111111make bonus		Compiles all bonus files instead of the mandatory ones
-111111111111111111111111111111make norminette		Checks Norm for both printf and libft files	
-111111111111111111111111111111111make git		Stages every modified file to commit and pushes to upstream branch
+```shell
+make fclean #Runs clean and removes the final library file, libftprintf.a.
 ```
+```shell
+make re	#Performs a full re-compilation (fclean then all).
+```
+## 3. Resources
 
-## Summary
+### 3.1 hird-party testers
 
+- [printfTester](https://github.com/Tripouille/printfTester)
+- [gavinfielder/pft](https://github.com/gavinfielder/pft)
+- [Mazoise/42TESTERS-PRINTF](https://github.com/Mazoise/42TESTERS-PRINTF)
+- [HappyTramp/ft_printf_test](https://github.com/HappyTramp/ft_printf_test)
+- [t0mm4rx/ftprintfdestructor](https://github.com/t0mm4rx/ftprintfdestructor)
+- [charMstr/printf_lover_v2](https://github.com/charMstr/printf_lover_v2)
 
-December 20th, 2025
+### 3.2 Useful Links
 
-### Bonus Structure:exclamation:
+- [C++ Reference - printf](http://www.cplusplus.com/reference/cstdio/printf/)
+- [Article: Secrets of “printf” (PDF)](https://www.cypress.com/file/54441/download)
+- [MacOS documentation - printf](https://opensource.apple.com/source/xnu/xnu-201/osfmk/kern/printf.c.auto.html)
+- [IEEE-754 Floating Point Converter](https://www.h-schmidt.net/FloatConverter/IEEE754.html)
+- [How does one print floats for ft_printf? - Stack Overflow - 42 Network](https://stackoverflow.com/c/42network/questions/133/134#134)
+- [Printing Floating-Point Numbers](http://www.ryanjuckett.com/programming/printing-floating-point-numbers/)
+- [Printing Floating-Point Numbers Quickly and Accurately with Integers](https://www.cs.tufts.edu/~nr/cs257/archive/florian-loitsch/printf.pdf)
+- [What precisely does the %g printf specifier mean? - Stack Overflow](https://stackoverflow.com/questions/54162152/what-precisely-does-the-g-printf-specifier-mean)
 
-#### Bonus Files & Folder Structure
+## 4. Additional section
+
+### 4.1 Functions
+
+### 4.2 Bonus Structure:exclamation
 
 `ft_printf()`s bonus code base has the following file structure:
 
@@ -126,7 +145,6 @@ direction LR
 
     class ft_printf_c["ft_printf_bonus.c"] {
 	    int ft_printf(const char *str, ...)
-	    int ft_print_format(t_format f, va_list ap)
     }
 
     class ft_parse_utils["ft_parse_utils.c"] {
@@ -137,6 +155,7 @@ direction LR
 
     class ft_parse["ft_parse_bonus.c"] {
 	    char *ft_parse(str, ap, f)
+	    int ft_print_format(t_format f, va_list ap)
 	    void ft_handle_flags(f)
     }
 
@@ -204,3 +223,7 @@ direction LR
     ft_print_hex_o --> ft_recursive_hex
     ft_print_hex_p --> ft_recursive_hex
 ```
+
+## Summary
+
+December 20th, 2025
