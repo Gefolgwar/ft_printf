@@ -1,6 +1,5 @@
 printfTester/
 pft/
-test_main/
 .vscode/
 *.out
 *.o
