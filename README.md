@@ -116,7 +116,7 @@ December 20th, 2025
 ---
 title ft_printf w/ Bonus Structure
 ---
-    graph LR;
+classDiagram
     class libft_h["libft.h"]
     
     class ft_printf_h["ft_printf_bonus.h"]
