@@ -42,7 +42,6 @@ typedef struct s_print_data
 
 int			ft_printf(const char *str, ...);
 t_format	ft_newformat(void);
-int			ft_print_format(t_format f, va_list ap);
 int			ft_print_c_pct(t_format f, va_list ap);
 int			ft_print_s(t_format f, va_list ap);
 int			ft_print_d_i_u(t_format f, va_list ap);
@@ -52,7 +51,6 @@ int			ft_parse(char *str, va_list	ap);
 int			ft_print_o(t_format f, va_list ap);
 int			ft_print_p(t_format f, va_list ap);
 int			ft_print_x(t_format f, va_list ap);
-
 char		*ft_uitoa_base(unsigned int n, int base);
 char		*ft_handle_d_i_u_data(t_format *f, va_list ap, t_num_info *info);
 int			ft_print_d_i_u(t_format f, va_list ap);

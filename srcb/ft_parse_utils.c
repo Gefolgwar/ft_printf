@@ -39,38 +39,13 @@ t_format	ft_parse_width(char *str, va_list ap, t_format f)
 	return (f);
 }
 
-static t_format	ft_get_precision_value(char **str, va_list ap, t_format f,
-						int *specified)
-{
-	if (**str == '*')
-	{
-		f.precision = va_arg(ap, int);
-		*specified = 1;
-		(*str)++;
-	}
-	else
-	{
-		f.precision = ft_atoi(*str);
-		*specified = 1;
-		while (ft_isdigit(**str))
-			(*str)++;
-	}
-	return (f);
-}
-
 t_format	ft_parse_precision(char *str, va_list ap, t_format f)
 {
-	int	specified;
-
-	specified = 0;
-	while (!ft_strchr(SPECIFIERS, *str))
-	{
-		if ((ft_isdigit(*str) || *str == '*') && !specified)
-		{
-			f = ft_get_precision_value(&str, ap, f, &specified);
-			continue ;
-		}
-		str++;
-	}
+	if (*str == '*')
+		f.precision = va_arg(ap, int);
+	else if (ft_isdigit(*str))
+		f.precision = ft_atoi(str);
+	else
+		f.precision = 0;
 	return (f);
 }

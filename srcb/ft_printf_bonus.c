@@ -28,23 +28,3 @@ int	ft_printf(const char *str, ...)
 	va_end(ap);
 	return (count);
 }
-
-int	ft_print_format(t_format f, va_list ap)
-{
-	int	count;
-
-	count = 0;
-	if (f.specifier == 'c' || f.specifier == '%')
-		count = ft_print_c_pct(f, ap);
-	else if (f.specifier == 's')
-		count = ft_print_s(f, ap);
-	else if (f.specifier == 'd' || f.specifier == 'i' || f.specifier == 'u')
-		count = ft_print_d_i_u(f, ap);
-	else if (f.specifier == 'x' || f.specifier == 'X')
-		count = ft_print_x(f, ap);
-	else if (f.specifier == 'o')
-		count = ft_print_o(f, ap);
-	else if (f.specifier == 'p')
-		count = ft_print_p(f, ap);
-	return (count);
-}

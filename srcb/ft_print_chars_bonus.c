@@ -15,8 +15,6 @@ int	ft_print_c_pct(t_format f, va_list ap)
 {
 	char	c;
 	int		count;
-	int		len_to_print;
-	char	padding_char;
 
 	count = 0;
 	if (f.specifier == 'c')
@@ -25,13 +23,11 @@ int	ft_print_c_pct(t_format f, va_list ap)
 	{
 		return (ft_print_pct());
 	}
-	len_to_print = 1;
-	padding_char = ' ';
-	if (!f.minus && f.width > len_to_print)
-		count += ft_putnchar_fd(padding_char, 1, f.width - len_to_print);
+	if (!f.minus && f.width > 1)
+		count += ft_putnchar_fd(' ', 1, f.width - 1);
 	count += ft_putchar_fd(c, 1);
-	if (f.minus && f.width > len_to_print)
-		count += ft_putnchar_fd(' ', 1, f.width - len_to_print);
+	if (f.minus && f.width > 1)
+		count += ft_putnchar_fd(' ', 1, f.width - 1);
 	return (count);
 }
 
@@ -60,11 +56,9 @@ int	ft_print_s(t_format f, va_list ap)
 {
 	char	*string;
 	int		count;
-	int		has_malloc;
 	int		s_len;
 
 	count = 0;
-	has_malloc = 0;
 	string = va_arg(ap, char *);
 	s_len = ft_get_str_len(f, &string);
 	if (!f.dot || f.precision < 0)
@@ -74,7 +68,5 @@ int	ft_print_s(t_format f, va_list ap)
 	count += ft_putstrn_fd(string, 1, s_len);
 	if (f.minus && f.width > s_len)
 		count += ft_putnchar_fd(' ', 1, f.width - s_len);
-	if (has_malloc)
-		free(string);
 	return (count);
 }
